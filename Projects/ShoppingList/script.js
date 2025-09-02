@@ -8,13 +8,14 @@ const clearBtn = document.getElementById("clear");
 const itemfilter = document.getElementById("filter");
 
 // Define all functions here
-// addItem fn creates element from user input and calls - createButton fn
-// createButton fn creates button and calls - createIcon fn
+// onAddItemSubmit() fn handles the form submit event and calls - addItemToDOM() fn
+// addItemToDOM() fn creates element from user input and calls - createButton() fn
+// createButton() fn creates button and calls - createIcon() fn
 
 //
-// addItem() fn
+// onAddItemSubmit() fn
 //
-const addItem = (e) => {
+const onAddItemSubmit = (e) => {
   e.preventDefault();
 
   // Validate user input and access its value from user using itemInput.value
@@ -27,10 +28,22 @@ const addItem = (e) => {
   // Placeholder console message to check if input was success
   //console.log("success");
 
+  addItemToDOM(newItem);
+
+  // Run checkUI() fn to check and make the clear all and item filter button appear whenever a new li item is added
+  checkUI();
+
+  // Get itemList value and clear out before user enters next list item
+  itemInput.value = "";
+
+};
+
+function addItemToDOM(item){
   // Create list item from user input
   const li = document.createElement("li");
   // Append newly created li element to DOM as a text node
-  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(item));
+  
   // Placeholder to check if list item added or not
   //console.log(li);
 
@@ -42,15 +55,9 @@ const addItem = (e) => {
   // Append complete li element to DOM
   itemList.appendChild(li);
 
-  // Run checkUI() fn to check and make the clear all and item filter button appear whenever a new li item is added
-  checkUI();
-
-  // Get itemList value and clear out before user enters next list item
-  itemInput.value = "";
-
   // Placeholder to check if button with icon has been added
   //console.log(button);
-};
+}
 
 //
 // createButton() fn
@@ -65,7 +72,7 @@ const createButton = (classes) => {
 
   return button;
 };
-
+//
 // createIcon() fn
 //
 const createIcon = (classes) => {
@@ -151,7 +158,7 @@ function checkUI() {
 }
 
 // Event Listeners
-itemForm.addEventListener("submit", addItem);
+itemForm.addEventListener("submit", onAddItemSubmit);
 itemList.addEventListener("click", removeItem);
 clearBtn.addEventListener("click", clearItems);
 itemfilter.addEventListener("input", filterItems);
