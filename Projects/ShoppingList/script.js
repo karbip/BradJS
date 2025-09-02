@@ -152,11 +152,11 @@ function setItemToEdit(item) {
   // Select li DOM element to edit
   itemList
     .querySelectorAll("li")
-    .forEach((i) => i.classList.remove("edit-mode"));
+    .forEach((i) => i.classList.remove("edit-mode")); // remove the list item not selected from edit mode
   item.classList.add("edit-mode"); // Apply edit-mode CSS class to item selected
-  formBtn.innerHTML = '<i class = "fa-solid fa-pen"> </i> Update item';
-  formBtn.style.backgroundColor = "green";
-  itemInput.value = item.textContent;
+  formBtn.innerHTML = '<i class = "fa-solid fa-pen"> </i> Update item'; // Change button to display 'Update item'
+  formBtn.style.backgroundColor = "green"; // and button to turn green when updating item
+  itemInput.value = item.textContent; // Display the list item to form field for editing
 }
 
 //
